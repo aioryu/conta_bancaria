@@ -1,14 +1,13 @@
 // Banco Luminaire - Menu Principal
 
-
 // Entrada do usuário
 import ler = require("readline-sync");
 
+// Importação de módulos necessários
+import { Conta } from "./src/model/Conta";
 
-// Função principal que exibe o menu e processa as opções
+
 function main() {
-    
-    // Funcão para exibir o menu e capturar a opção do usuário
     let opcao: number;
 
     while (true) {
@@ -23,17 +22,14 @@ function main() {
         console.log("8 - Transferir");
         console.log("9 - Sair");
 
-        // Captura a opção do usuário
         opcao = ler.questionInt("Escolha uma opção: ");
 
-        // Verifica se a opção é 9 para sair do menu
         if (opcao === 9) {
             console.log("Obrigado por usar o Banco Luminaire!");
             sobre();
             break;
         }
 
-        // Processa a opção escolhida
         switch (opcao) {
             case 1:
                 console.log("Criar Conta");
@@ -62,10 +58,36 @@ function main() {
             default:
                 console.log("Opção inválida.");
         }
+
+        //  TESTES COM OBJETOS CONTA 
+        console.log("\n==== TESTES COM CONTAS ====");
+
+        const conta1 = new Conta(1, 101, 1, "Vitor", 1000);
+        const conta2 = new Conta(2, 102, 2, "Maria", 500);
+
+        console.log("\nConta 1 - Inicial");
+        conta1.visualizar();
+
+        console.log("\nConta 2 - Inicial");
+        conta2.visualizar();
+
+        console.log("\n>> Depositando R$ 200 na Conta 1");
+        conta1.depositar(200);
+        conta1.visualizar();
+
+        console.log("\n>> Sacando R$ 100 da Conta 2");
+        conta2.sacar(100);
+        conta2.visualizar();
+
+        console.log("\n>> Tentando sacar R$ 1000 da Conta 2 (saldo insuficiente)");
+        conta2.sacar(1000);
+        conta2.visualizar();
+
+        break; // 
+        
     }
 }
 
-// Função para exibir informações sobre o desenvolvedor
 function sobre() {
     console.log("\nDesenvolvido por Vitor Nazareth");
     console.log("Email: vitorzath@gmail.com");
