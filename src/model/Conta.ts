@@ -1,3 +1,4 @@
+
 export abstract class Conta {
   protected _numero: number;
   protected _agencia: number;
