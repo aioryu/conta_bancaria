@@ -1,11 +1,20 @@
-
+//Exportar a classe Conta como abstrata
+// A classe Conta é uma classe base que não pode ser instanciada diretamente
+// Ela serve como modelo para outras classes que herdam dela, como ContaCorrente e Conta
 export abstract class Conta {
+  
+  // Atributos protegidos que podem ser acessados pelas classes filhas
+  // Esses atributos representam as informações básicas de uma conta bancária
   protected _numero: number;
   protected _agencia: number;
   protected _tipo: number;
   protected _titular: string;
   protected _saldo: number;
 
+
+  // Construtor da classe Conta
+  // Recebe os parâmetros necessários para inicializar a conta
+  // Inicializa os atributos da classe com os valores fornecidos
   constructor(numero: number, agencia: number, tipo: number, titular: string, saldo: number) {
     this._numero = numero;
     this._agencia = agencia;
@@ -14,6 +23,10 @@ export abstract class Conta {
     this._saldo = saldo;
   }
 
+  // Métodos getters para acessar os atributos da classe
+  // Esses métodos permitem que outras classes acessem os valores dos atributos
+  // Eles são públicos para que possam ser chamados de fora da classe
+  // Retornam os valores dos atributos correspondentes
   public get numero() {
     return this._numero;
   }
@@ -34,6 +47,10 @@ export abstract class Conta {
     return this._saldo;
   }
 
+  // Métodos abstratos que devem ser implementados pelas classes filhas
+  // Esses métodos definem a assinatura que as classes filhas devem seguir
+  // Eles não têm implementação na classe base, mas devem ser implementados nas classes derivadas
+
   public sacar(valor: number): boolean {
     if (this._saldo < valor) {
       console.log("Saldo insuficiente!");
@@ -43,10 +60,14 @@ export abstract class Conta {
     return true;
   }
 
+  // Método para depositar um valor na conta
+  // Adiciona o valor ao saldo da conta
   public depositar(valor: number): void {
     this._saldo += valor;
   }
 
+  // Método para visualizar os dados da conta
+  // Exibe as informações da conta, como número, agência, tipo, titular e saldo
   public visualizar(): void {
     let tipoConta = this._tipo === 1 ? "Conta Corrente" : "Conta Poupança";
     console.log("\n=== DADOS DA CONTA ===");
